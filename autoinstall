@@ -1,0 +1,78 @@
+#!/bin/sh
+
+# 有待完善
+# andy chen (bootoo@sina.cn)
+#
+#
+
+#安装sublime text 2
+install_sublime(){
+echo "install begin..."
+	sudo add-apt-repository ppa:webupd8team/sublime-text-2
+	sudo apt-get update
+	sudo apt-get install sublime-text
+	#配置sublime text
+
+#	wget -c -P ./Downloads http://qd.baidupcs.com/file/08e9ace0f8a69bf4e111b5799ee90d08?bkt=p2-nj-746&fid=2399807473-250528-860369512527004&time=1418474882&sign=FDTAXERLB-DCb740ccc5511e5e8fedcff06b081203-%2Fd%2B4PHvS8PIREcGdvZrL4wSpUJ0%3D&to=qb&fm=Nan,B,G,ny&newver=1&newfm=1&flow_ver=3&sl=81723464&expires=8h&rt=pr&r=659259049&mlogid=2386235753&vuk=2399807473&vbdid=764765205&fin=elementary_OS_Config&fn=elementary_OS_Config
+
+
+	
+echo "install success!"
+}
+
+#安装 chrome
+install_chrome(){
+	wget -c -O ./Downloads/Software/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb
+	cd ./Downloads/Software
+	sudo apt-get -f install
+	sudo dpkg -i google-chrome.deb
+}
+
+#安装 firefox
+install_firefox(){
+	cd ~
+	sudo apt-get install firefox
+}
+
+#安装 goagent 和 配置
+
+
+#安装 重置linux文件名
+reconfig_linux(){
+	cd ~
+	mv ./下载 Downloads
+	mv ./公共的 Public
+	mv ./音乐 Musics
+	mv ./视频 Videos
+	mv ./图片 Photos
+	mv ./文档 Documents
+	mv ./模板 Others
+
+	sudo apt-get updat
+
+	# 安装纠错
+	sudo apt-get -f install
+
+	# 安装vim	
+	sudo apt-get install vim
+	# 安装yum	
+	sudo apt-get install yum
+
+	# 安装alien
+	sudo apt-get install alien
+
+	# 安装unrar
+	sudo apt-get install unrar
+
+	echo "uninstall midori..."
+	sudo apt-get autoremove midori-granite
+} 
+
+#安装 goagent 和 配置
+
+
+#reconfig_linux
+install_chrome
+install_firefox
+install_sublime
+
