@@ -55,6 +55,7 @@ reconfig_linux(){
 
 	# 安装vim	
 	sudo apt-get install vim
+	
 	# 安装yum	
 	sudo apt-get install yum
 
