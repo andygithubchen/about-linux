@@ -13,10 +13,6 @@ echo "install begin..."
 	sudo apt-get install sublime-text
 	#配置sublime text
 
-#	wget -c -P ./Downloads http://qd.baidupcs.com/file/08e9ace0f8a69bf4e111b5799ee90d08?bkt=p2-nj-746&fid=2399807473-250528-860369512527004&time=1418474882&sign=FDTAXERLB-DCb740ccc5511e5e8fedcff06b081203-%2Fd%2B4PHvS8PIREcGdvZrL4wSpUJ0%3D&to=qb&fm=Nan,B,G,ny&newver=1&newfm=1&flow_ver=3&sl=81723464&expires=8h&rt=pr&r=659259049&mlogid=2386235753&vuk=2399807473&vbdid=764765205&fin=elementary_OS_Config&fn=elementary_OS_Config
-
-
-	
 echo "install success!"
 }
 
