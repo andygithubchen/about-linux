@@ -72,7 +72,7 @@ reconfig_linux(){
 
 
 #reconfig_linux
-install_chrome
-install_firefox
-install_sublime
+#install_chrome
+#install_firefox
+#install_sublime
 
