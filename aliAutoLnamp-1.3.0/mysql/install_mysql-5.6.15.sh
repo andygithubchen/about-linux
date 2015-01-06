@@ -45,7 +45,6 @@ net_buffer_length = 8K
 read_buffer_size = 256K
 read_rnd_buffer_size = 512K
 myisam_sort_buffer_size = 8M
-skip-grant-tables
 
 log-bin=mysql-bin
 binlog_format=mixed
