@@ -18,8 +18,8 @@ echo "install success!"
 
 #安装 chrome
 install_chrome(){
-	wget -c -O ./Downloads/Software/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb
-	cd ./Downloads/Software
+	wget -c -O ./Software/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb
+	cd ./Software
 	sudo apt-get -f install
 	sudo dpkg -i google-chrome.deb
 }
@@ -43,8 +43,9 @@ reconfig_linux(){
 	mv ./图片 Photos
 	mv ./文档 Documents
 	mv ./模板 Others
+	mkdir Software
 
-	sudo apt-get updat
+	sudo apt-get update
 
 	# 安装纠错
 	sudo apt-get -f install
@@ -60,16 +61,36 @@ reconfig_linux(){
 
 	# 安装unrar
 	sudo apt-get install unrar
+} 
 
+#卸载默认浏览器
+uninstall_midori(){
 	echo "uninstall midori..."
 	sudo apt-get autoremove midori-granite
-} 
+}
 
 #安装 goagent 和 配置
 
+echo '----software----------'
+echo '1.chrome'
+echo '2.firefox'
+echo '3.sublime text'
+echo '0.all'
+echo '----------------------'
+echo ''
+read -p 'palse select option:' option
 
-#reconfig_linux
-#install_chrome
-#install_firefox
-#install_sublime
-
+case "$option" in
+	1)
+	install_chrome;;
+	2)
+	install_firefox;;
+	3)
+	install_sublime;;
+	0)
+	reconfig_linux
+	install_chrome
+	install_firefox
+	install_sublime
+	uninstall_midori;;
+esac
