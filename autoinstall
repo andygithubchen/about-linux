@@ -1,9 +1,8 @@
 #!/bin/sh
 
-# 有待完善
+# my elementaryOS config shell script
 # andy chen (bootoo@sina.cn)
-#
-#
+# 有待完善
 
 #安装sublime text 2
 install_sublime(){
