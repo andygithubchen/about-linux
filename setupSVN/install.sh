@@ -16,6 +16,7 @@ byUbuntu(){
 #	sudo svnadmin create Warehouse
 
   # --- build conf file and child files authz,passwd ------------------
+  cd /srv/svn/
   sudo mkdir conf
   sudo touch ./conf/authz ./conf/passwd
 
