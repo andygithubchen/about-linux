@@ -162,14 +162,16 @@ check_users(){
   num=${2##*_}
     #user_0 = 123456
     #user_0_tes = 123456
+  users_str=''
   for uStr in $arr; do
     uArr=$(strToarray -, ${uStr})
     uArr=($uArr)
     uName=${uArr[0]}
     uPawd=${uArr[1]}
-    sed -i "/${num}_tes/a\ ${uName} = ${uPawd}\n" ./conf/passwd
-    users_str+=', '$uName
+    sed -i "/${num}_tes/a\\${uName} = ${uPawd}" ./conf/passwd
+    users_str+=$uName', '
   done
+  users_str=${users_str%,*}
 
   # --- edit authz  file ---
   re_str="user_${num}_tes"
@@ -177,7 +179,7 @@ check_users(){
     re_str="user_${num}"
   fi
 
-  sed -i "s/${re_str}/${users_str}/" ./conf/authz
+  sed -i "s/${re_str}$/${users_str}/" ./conf/authz
   #grounp_null_0_dev = user_0
   #grounp_null_0_tes = user_0_tes
 }
@@ -199,7 +201,7 @@ strToarray(){
 
 # === by centos ===============================================================================
 byCentos(){
-  echo "andy"
+  echo "byCentos,developments....."
 }
 
 
@@ -227,9 +229,6 @@ case "$option" in
 		echo "select error!!"
 		echo '';;
 esac
-
-
-
 
 #read -p 'input:' new_name
 #echo "$new_name" | awk '/^[0-9a-zA-Z]+$/'

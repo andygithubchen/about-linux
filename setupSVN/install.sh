@@ -95,7 +95,9 @@ realm = null_$1
 
 # === set up for Ubuntu =======================================================================
 byCentos(){
-	echo "byCentos"
+  echo ''
+	echo "byCentos,developing......."
+  echo ''
 }
 
 
