@@ -6,7 +6,9 @@ else
 machine=i686
 fi
 
-#memcache
+CPU_NUM=$(cat /proc/cpuinfo | grep processor | wc -l)
+
+#memcache ---------------------------------------------------------------------------------
 if [ ! -f memcache-3.0.6.tgz ];then
 	wget http://oss.aliyuncs.com/aliyunecs/onekey/php_extend/memcache-3.0.6.tgz
 fi
@@ -15,7 +17,6 @@ tar -xzvf memcache-3.0.6.tgz
 cd memcache-3.0.6
 /alidata/server/php/bin/phpize
 ./configure --enable-memcache --with-php-config=/alidata/server/php/bin/php-config
-CPU_NUM=$(cat /proc/cpuinfo | grep processor | wc -l)
 if [ $CPU_NUM -gt 1 ];then
     make -j$CPU_NUM
 else
@@ -25,7 +26,27 @@ make install
 cd ..
 echo "extension=memcache.so" >> /alidata/server/php/etc/php.ini
 
-#zend
+#redis (andychen add 2015-2-6) ------------------------------------------------------------
+if [ ! -f phpredis-2.2.4.tar.gz ];then
+  wget -O ./phpredis-2.2.4.tar.gz https://github.com/nicolasff/phpredis/archive/2.2.4.tar.gz
+fi
+rm -rf phpredis-2.2.4
+tar -xzvf phpredis-2.2.4.tar.gz
+cd phpredis-2.2.4
+/alidata/server/php/bin/phpize
+./configure --with-php-config=/alidata/server/php/bin/php-config
+if [ $CPU_NUM -gt 1 ];then
+    make -j$CPU_NUM
+else
+    make
+fi
+make install
+cd ..
+echo 'extension=redis.so' >> /alidata/server/php/etc/php.ini
+
+
+
+#zend -------------------------------------------------------------------------------------
 if ls -l /alidata/server/ |grep "5.3.18" > /dev/null;then
   mkdir -p /alidata/server/php/lib/php/extensions/no-debug-non-zts-20090626/
   if [ $machine == "x86_64" ];then

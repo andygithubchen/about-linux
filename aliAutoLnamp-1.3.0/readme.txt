@@ -1,5 +1,7 @@
 ------------------------- 自动安装过程 -------------------------
 
+添加了我的个人修改
+
 图文教程地址：http://help.aliyun.com/manual?spm=0.0.0.0.oMceY0&helpId=129
 
 此安装包可在阿里云所有linux系统上部署安装。
@@ -9,9 +11,8 @@ nginx：1.0.15、1.2.5、1.4.4（删除老版本1.0.4）
 apache：2.2.22、2.4.2
 mysql：5.1.73、5.5.35、5.6.15
 php：5.3.18、5.4.23、5.5.7（删除老版本5.2.17）
-php扩展：memcache、Zend Engine/OPcache
+php扩展：memcache、redis、Zend Engine/OPcache
 ftp：（yum/apt-get安装）
-phpwind：8.7 GBK
 phpmyadmin：3.2.2.2
 
 安装步骤：
@@ -24,8 +25,8 @@ cd sh
 
 安装完成后请查看account.log文件，数据库密码在里面。
 
-        
-         如果有什么使用问题、bug，或者建议，可联系作者：qrj@jiagouyun.com
+
+如果有什么使用问题、bug，或者建议，可联系作者：qrj@jiagouyun.com
 
 --------------------------- version 1.3.0 测试记录 --------------------------
 

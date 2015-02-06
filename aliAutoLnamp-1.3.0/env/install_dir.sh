@@ -7,7 +7,6 @@ useradd -g www -M -d /alidata/www -s /sbin/nologin www &> /dev/null
 mkdir -p /alidata
 mkdir -p /alidata/server
 mkdir -p /alidata/www
-mkdir -p /alidata/www/phpwind
 mkdir -p /alidata/log
 mkdir -p /alidata/log/php
 mkdir -p /alidata/log/mysql
