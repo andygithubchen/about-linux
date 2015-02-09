@@ -24,7 +24,10 @@ else
 fi
 make install
 cd ..
-echo "extension=memcache.so" >> /alidata/server/php/etc/php.ini
+echo "
+[Memcache]
+extension=memcache.so
+" >> /alidata/server/php/etc/php.ini
 
 #redis (andychen add 2015-2-6) ------------------------------------------------------------
 if [ ! -f phpredis-2.2.4.tar.gz ];then
@@ -42,7 +45,10 @@ else
 fi
 make install
 cd ..
-echo 'extension=redis.so' >> /alidata/server/php/etc/php.ini
+echo "
+[Redis]
+extension=redis.so
+" >> /alidata/server/php/etc/php.ini
 
 
 
