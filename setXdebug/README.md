@@ -7,7 +7,7 @@
 
   $ ./install_xdebug.sh
 ```
-  最后修改php.ini文件中的下列值：
-  error_reporting = E_ALL
-  display_error = On
-  html_error = On
+最后修改php.ini文件中的下列值：
+error_reporting = E_ALL
+display_error = On
+html_error = On
