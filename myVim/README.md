@@ -1,4 +1,6 @@
-install
+我正在使用的vim ,自己加入了多个主题供候选。
+
+## install
 ==================
 ```
   $ chmod +x install.sh
@@ -6,6 +8,4 @@ install
   $ ./install.sh
 ```
 
-this myVim from github dot_vimrc item, and thank humiaozuzu
-
-github: https://github.com/humiaozuzu/dot-vimrc
+源码来自 https://github.com/humiaozuzu/dot-vimrc
