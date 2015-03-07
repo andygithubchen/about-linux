@@ -230,25 +230,6 @@ case "$option" in
 		echo '';;
 esac
 
-#read -p 'input:' new_name
-#echo "$new_name" | awk '/^[0-9a-zA-Z]+$/'
-#echo "$new_name" | awk '/^[0-9a-zA-Z][a-z0-9A-Z_-]+$/'
-#andy=$(( $new_name < 1 ? 23 : 98))
 
-#sed -n "s/user_0/andychen/pg" /srv/svn/conf/passwd
-#grep -q "user_0" /srv/svn/conf/passwd # && echo "yes" || echo 'no'
-#andy= sed -n "s/user_0/andychen/g" /srv/svn/conf/passwd
-#    arr=(1 7 3 6)
-#    andy='0000'
-#    for (( i=0; i<4; i++)); do
-#      echo ${arr[$i]}
-#      andy+=${arr[$i]}
-#
-#      if [ "$i" = 0 ]; then
-#        andy+='--'
-#      else
-#        andy+=','
-#      fi
-#    done
-#echo $andy
+
 
