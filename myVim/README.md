@@ -1,8 +1,8 @@
 install
 ==================
-$ chmod +x install.sh
+  $ chmod +x install.sh
 
-$ ./install.sh
+  $ ./install.sh
 
 this myVim from github dot_vimrc item, and thank humiaozuzu
 

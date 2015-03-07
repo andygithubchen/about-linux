@@ -6,7 +6,7 @@
 # this myVim from github dot_vimrc item, and thank humiaozuzu.
 
 echo ''
-echo '================ igen config ================'
+echo '================ bigen config ================'
 echo ''
 
 sudo apt-get update
@@ -14,10 +14,10 @@ sudo apt-get install vim-gtk
 sudo apt-get install ack-grep ctags
 
 echo ''
-echo '========== detele old .vim files ============'
+echo '========== delete old .vim files ============'
 echo ''
 
-# detele old .vim files =====================================
+# delete old .vim files =====================================
 vim_old="~/.vim/"
 vimrc_old="~/.vimrc"
 
