@@ -13,8 +13,8 @@ byUbuntu(){
   sudo mkdir /srv/shareFile
   sudo chmod 777 /srv/shareFile
 
-  cp -f ./smb.conf /etc/samba/
-  sed -i "s/dir/srv\/shareFile/g" /etc/samba/smb.conf
+  cp -f ./smb.conf /etc/
+  sed -i "s/dir/srv\/shareFile/g" /etc/smb.conf
   cd /srv/shareFile
   sudo touch public.txt
   echo "this our share file! andychen (`date`)" > /srv/shareFile/public.txt
