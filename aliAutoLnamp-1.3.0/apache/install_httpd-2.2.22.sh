@@ -6,11 +6,11 @@ fi
 tar zxvf httpd-2.2.22.tar.gz
 cd httpd-2.2.22
 ./configure --prefix=/alidata/server/httpd \
---with-mpm=prefork \
---enable-so \
---enable-rewrite \
---enable-mods-shared=all \
---enable-nonportable-atomics=yes \
+--with-mpm=prefork \#
+--enable-so \       #
+--enable-rewrite \  #
+--enable-mods-shared =all \
+--enable-nonportable#-atomics=yes \
 --disable-dav \
 --enable-deflate \
 --enable-cache \
