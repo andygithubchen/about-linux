@@ -33,7 +33,7 @@ echo ''
 echo '========= set up new .vim files ============'
 echo ''
 # set up new .vim files ===================================
-mv ./.vim ~/
+cp -r ./.vim ~/
 ln -s ~/.vim/vimrc ~/.vimrc
 
 echo ''
