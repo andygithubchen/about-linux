@@ -30,17 +30,17 @@
 ```
 ## create new git repository
 1. 将小伙伴的公钥拿来（建议你的小伙伴使用“ssk-keygen -t rsa -P '' ”来生成公钥）
-2. 分别按小伙伴在团队中的角色重命名他们的公钥，如：
-   atom  开发人员   就将他的id_rsa.pub 重命名为 atom@develop.pub
-   andy  开发人员   就将他的id_rsa.pub 重命名为 andy@develop.pub
-   mali  测试人员   就将她的id_rsa.pub 重命名为 mali@test.pub
-   遵循这样的重命名规范后,对应的开发人员就有读写权限，而测试人员就只有读的权限。
+2. 分别按小伙伴在团队中的角色重命名他们的公钥，如：\<br>
+   atom  开发人员   就将他的id_rsa.pub 重命名为 atom@develop.pub\<br>
+   andy  开发人员   就将他的id_rsa.pub 重命名为 andy@develop.pub\<br>
+   mali  测试人员   就将她的id_rsa.pub 重命名为 mali@test.pub\<br>
+   遵循这样的重命名规范后,对应的开发人员就有读写权限，而测试人员就只有读的权限。\<br>
 
-3. 接着就把上一步的公钥全部放到和create.sh文件同级的目录下,如：
-   ../setupGit/atom@develop.pub
-   ../setupGit/andy@develop.pub
-   ../setupGit/create.sh
-   ../setupGit/mali@test.pub
+3. 接着就把上一步的公钥全部放到和create.sh文件同级的目录下,如：\<br>
+   ../setupGit/atom@develop.pub\<br>
+   ../setupGit/andy@develop.pub\<br>
+   ../setupGit/create.sh\<br>
+   ../setupGit/mali@test.pub\<br>
 
 4. 最后就是执行create.sh文件,如要创建一个名叫time的仓库：
 ```
