@@ -4,86 +4,81 @@
 # Date  : Sun Apr 19 21:22:38 CST 2015
 # Author: andychen (bootoo@sina.cn)
 
+
+# 要求用root用户执行 =================================================
+if [ `whoami` != 'root' ];then
+  echo "+----------------------------+"
+  echo "|  plase use root user       |"
+  echo "+----------------------------+"
+  exit 0
+fi
+
+
 # 参数赋值 ===========================================================
-group=gitrep
-user=gitrep
+group=git   #一定要是git
+user=git    #一定要是git ，同上。尚不明原因
 git_user_name=andychen
 git_user_email=bootoo@sina.cn
-path=/srv/git
-rep_path=${path}/repositories
+rep_path=/home/${user}/repositories
 gitosis_path=https://github.com/res0nat0r/gitosis.git
-local_ip=127.0.0.1
+local_ip=192.168.73.128
 
 
 
 
 # 基础安装 ===========================================================
-sudo apt-get update
-sudo apt-get install git-core
-sudo apt-get install gitosis
-sudo apt-get install openssh-server 
-sudo apt-get install openssh-client 
-sudo apt-get install openssh-client 
-sudo apt-get install python-setuptools
-
-
-# 创建个人公钥和私钥 =================================================
+#apt-get update
+#apt-get install git-core
+#apt-get install gitosis
+#apt-get install openssh-server
+#apt-get install openssh-client
+#apt-get install openssh-client
+#apt-get install python-setuptools
 
 
 # 开始 ===============================================================
 # add group and user
-sudo groupadd ${group}
-sudo useradd -g ${group} -M -d ${path}  -s /sbin/nologin ${user} $> /dev/null 
+groupdel ${group}
+userdel ${user}
+
+useradd -m ${user}
+passwd ${user}
+groupadd ${group}
 
 # build git repositories
-sudo mkdir -p ${rep_path} 
-sudo chown ${group}:${user} ${rep_path} 
-sudo chmod 755 ${rep_path} 
+mkdir -p ${rep_path}
+chown ${group}:${user} ${rep_path}
+chmod 755 ${rep_path}
 
 # config git user info
-sudo git config --global user.name "${git_user_name}"
-sudo git config --global user.email "${git_user_email}"
+git config --global user.name "${git_user_name}"
+git config --global user.email "${git_user_email}"
 
 # install gitosis
 cd /tmp
 git clone ${gitosis_path}
 cd ./gitosis
-sudo python setup.py install
+python setup.py install
 cd -
 
-# config gitosis
+
+# 配置gitosis ========================================================
+
+# create pravite key
 cd ~
-ssh-keygen -t rsa
+ssh-keygen -t rsa -P ''
 cp ~/.ssh/id_rsa.pub /tmp
+chmod 777 /tmp/id_rsa.pub
 sudo -H -u ${user} gitosis-init < /tmp/id_rsa.pub
-sudo chmod 755 ${rep_path}/gitosis-admin.git/hooks/post-update
+chmod 755 ${rep_path}/gitosis-admin.git/hooks/post-update
+echo "#-----------请不要移动以上内容----------#" >> ${rep_path}/gitosis-admin.git/gitosis.conf
 
-# editor gitosis config
-git clone git@${local_ip}:gitosis-admin.git
-cd gitosis-admin/
-
-echo "
-  [gitosis]
-
-
-  [group gitosis-admin]
-  writable = gitosis-admin
-  members  = admin@admin
-
-
-
-  [group item2_develop]
-  writable = item2
-  members  = e@develop f@develop
-
-  [group item2_test]
-  readonly = item2
-  members  = g@test h@test
-
-
-
-" > ./gitosis.conf
-
+# show repositories dir
+echo "+-----------------------------------------------------------------------+"
+echo "+ use: "
+echo "+ git clone git@${local_ip}:gitosis-admin.git"
+echo "+ * the really passwd is "`whoami`"'s passwd "
+echo "+-----------------------------------------------------------------------+"
 
 
 
