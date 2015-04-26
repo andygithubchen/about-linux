@@ -5,14 +5,14 @@
 # Author: andychen (bootoo@sina.cn)
 
 
-# 要求用root用户执行 =================================================
+# 基本检查 =================================================
+# 要求用root用户执行
 if [ `whoami` != 'root' ];then
   echo "+----------------------------+"
   echo "|  plase use root user       |"
   echo "+----------------------------+"
   exit 0
 fi
-
 if [ -z ${1} ];then
   echo "+------------------------------------+"
   echo "|  plase input your repositoy name   |"
@@ -21,17 +21,14 @@ if [ -z ${1} ];then
 fi
 
 # 参数赋值 ===========================================================
-group=git   #一定要是git
-user=git    #一定要是git ，同上。尚不明原因
-server_ip=192.168.73.128
-rep_path=/home/git/repositories
+user=git     #一定要是git
+group=git    #一定要是git ，同上。尚不明原因
 item_name=${1}
 repository=${item_name}.git
+server_ip=192.168.73.128
+rep_path=/home/${user}/repositories
 
-
-
-# editor gitosis config
-
+# 收集仓库用户的公钥 ================================================
 find=`find ./ -name "*.pub"`
 if [ ${#find[@]} -eq 0 ];then
   echo ""
@@ -58,12 +55,10 @@ done
 
 
 
-
+# 将仓库用户配置到gitosis-admin.git ==================================
 git clone git@${server_ip}:gitosis-admin.git
 
-echo '--------------------------------------------------------------------------------------------------'
 cp ./*.pub ./gitosis-admin/keydir
-
 cd gitosis-admin/
 
 # 取得仓库创建者在gitosis-admin里的用户名(超级用户名)
@@ -85,21 +80,21 @@ members  =${tes_members}
 
 git add .
 git commit -am "add ${item_name} project and users"
-#git push origin master
 git push
 
-echo '--------------------------------------------------------------------------------------------------'
 cd - > /dev/null
+rm -fr ./gitosis-admin
 
 
-# 创建${item_name}
+# 创建${item_name}仓库 ==============================================
+# 创建仓库
 mkdir -p ${rep_path}/${repository}
 cd ${rep_path}/${repository}
 git init --bare
 chown -R ${group}:${user} ${rep_path}/${repository}
 cd - > /dev/null
-echo '--------------------------------------------------------------------------------------------------'
 
+# 初始化此仓库
 tmp_file=`date +%Y_%m_%d`_${item_name}
 mkdir ${tmp_file}
 cd ${tmp_file}
@@ -110,6 +105,8 @@ git commit -am "initial version"
 git remote add origin git@${server_ip}:${repository}
 git push origin master
 
+cd - > /dev/null
+rm -fr ${tmp_file}
 
 
 echo '+---------------------------------------------------------------+';

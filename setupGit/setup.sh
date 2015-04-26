@@ -19,21 +19,21 @@ group=git   #一定要是git
 user=git    #一定要是git ，同上。尚不明原因
 git_user_name=andychen
 git_user_email=bootoo@sina.cn
+local_ip=192.168.73.128
 rep_path=/home/${user}/repositories
 gitosis_path=https://github.com/res0nat0r/gitosis.git
-local_ip=192.168.73.128
 
 
 
 
 # 基础安装 ===========================================================
-#apt-get update
-#apt-get install git-core
-#apt-get install gitosis
-#apt-get install openssh-server
-#apt-get install openssh-client
-#apt-get install openssh-client
-#apt-get install python-setuptools
+apt-get update
+apt-get install git-core
+apt-get install gitosis
+apt-get install openssh-server
+apt-get install openssh-client
+apt-get install openssh-client
+apt-get install python-setuptools
 
 
 # 开始 ===============================================================
@@ -63,15 +63,13 @@ cd -
 
 
 # 配置gitosis ========================================================
-
 # create pravite key
 cd ~
-ssh-keygen -t rsa -P ''
+ssh-keygen -t rsa -P ''    # 加-P ''后才是真正的免输密码
 cp ~/.ssh/id_rsa.pub /tmp
 chmod 777 /tmp/id_rsa.pub
 sudo -H -u ${user} gitosis-init < /tmp/id_rsa.pub
 chmod 755 ${rep_path}/gitosis-admin.git/hooks/post-update
-echo "#-----------请不要移动以上内容----------#" >> ${rep_path}/gitosis-admin.git/gitosis.conf
 
 # show repositories dir
 echo "+-----------------------------------------------------------------------+"
