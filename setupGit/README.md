@@ -35,7 +35,7 @@
 2. 分别按小伙伴在团队中的角色重命名他们的公钥，如：       
    atom ----- 开发人员 ------- 就将他的id_rsa.pub 重命名为 atom@develop.pub       
    andy ----- 开发人员 ------- 就将他的id_rsa.pub 重命名为 andy@develop.pub        
-   mali ----- 测试人员 ------- 就将她的id_rsa.pub 重命名为 mali@test.pub        
+   mali ------ 测试人员 ------- 就将她的id_rsa.pub 重命名为 mali@test.pub        
    遵循这样的重命名规范后,对应的开发人员就有读写权限，而测试人员就只有读的权限。         
 
 3. 接着就把上一步的公钥全部放到和create.sh文件同级的目录下,如：     
