@@ -26,7 +26,7 @@ group=git    #一定要是git ，同上。尚不明原因
 item_name=${1}
 repository=${item_name}.git
 server_ip=192.168.73.128
-rep_path=/home/${user}/repositories
+rep_path=/home/${user}/repositories/
 
 # 收集仓库用户的公钥 ================================================
 find=`find ./ -name "*.pub"`
@@ -88,10 +88,10 @@ rm -fr ./gitosis-admin
 
 # 创建${item_name}仓库 ==============================================
 # 创建仓库
-mkdir -p ${rep_path}/${repository}
-cd ${rep_path}/${repository}
+mkdir -p ${rep_path}${repository}
+cd ${rep_path}${repository}
 git init --bare
-chown -R ${group}:${user} ${rep_path}/${repository}
+chown -R ${group}:${user} ${rep_path}${repository}
 cd - > /dev/null
 
 # 初始化此仓库
@@ -111,7 +111,11 @@ rm -fr ${tmp_file}
 
 echo '+---------------------------------------------------------------+';
 echo '|  succeed !';
+echo '|  ';
+echo '|  use:';
 echo '|  git clone git@'${server_ip}':'${repository};
+echo '|  or';
+echo '|  git clone git@'${server_ip}':'${rep_path}${repository};
 echo '+---------------------------------------------------------------+';
 
 
