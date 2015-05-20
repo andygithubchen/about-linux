@@ -8,18 +8,18 @@
 # by Ubuntu
 byUbuntu(){
   echo "byUbuntu"
-  sudo apt-get update
-  sudo apt-get install samba
-  sudo mkdir /srv/shareFile
-  sudo chmod 777 /srv/shareFile
+  apt-get update
+  apt-get install samba
+  mkdir /srv/shareFile
+  chmod 777 /srv/shareFile
 
-  cp -f ./smb.conf /etc/
-  sed -i "s/dir/srv\/shareFile/g" /etc/smb.conf
+  cp -f ./smb.conf /etc/samba/
+  sed -i "s/dir/srv\/shareFile/g" /etc/samba/smb.conf
   cd /srv/shareFile
-  sudo touch public.txt
+  touch public.txt
   echo "this our share file! andychen (`date`)" > /srv/shareFile/public.txt
 
-  sudo sercive smbd restart
+  sercive smbd restart
   echo ''
   echo '+--------------------------------------+'
   echo '|  ********** install samba ***********|'
@@ -36,8 +36,8 @@ byCentos(){
   mkdir /srv/shareFile
   chmod 777 /srv/shareFile
 
-  cp -f ./smb.conf /etc/
-  sed -i "s/dir/srv\/shareFile/g" /etc/smb.conf
+  cp -f ./smb.conf /etc/samba/
+  sed -i "s/dir/srv\/shareFile/g" /etc/samba/smb.conf
   cd /srv/shareFile
   touch public.txt
   echo "this our share file! andychen (`date`)" > /srv/shareFile/public.txt
@@ -51,6 +51,14 @@ byCentos(){
   echo ''
 }
 
+
+# 要求用root用户执行
+if [ `whoami` != 'root' ];then
+    echo "+----------------------------+"
+    echo "|  plase use root user       |"
+    echo "+----------------------------+"
+    exit 1
+fi
 
 echo ''
 echo '+--------------------------------------+'

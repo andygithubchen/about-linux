@@ -1,4 +1,4 @@
-samb是一个linux与windows实现文件共享的一个服务,此安装脚本只支持ubuntu系统，centos待开发。
+samb是一个linux与windows实现文件共享的一个服务,安装脚本支持ubuntu，centos。
 
 ## install
 ```
