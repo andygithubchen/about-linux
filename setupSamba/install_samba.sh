@@ -31,9 +31,24 @@ byUbuntu(){
 
 # by Centos
 byCentos(){
-  echo ""
-  echo "developing...."
-  echo ""
+  echo "byCentos"
+  yum -y install samba
+  mkdir /srv/shareFile
+  chmod 777 /srv/shareFile
+
+  cp -f ./smb.conf /etc/
+  sed -i "s/dir/srv\/shareFile/g" /etc/smb.conf
+  cd /srv/shareFile
+  touch public.txt
+  echo "this our share file! andychen (`date`)" > /srv/shareFile/public.txt
+
+  /etc/init.d/smb start
+  echo ''
+  echo '+--------------------------------------+'
+  echo '|  ********** install samba ***********|'
+  echo '|              succeed!!               |'
+  echo '+--------------------------------------+'
+  echo ''
 }
 
 
