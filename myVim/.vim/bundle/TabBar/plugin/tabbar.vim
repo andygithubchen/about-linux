@@ -20,8 +20,8 @@
 " press zR , in normal mode to OPEN  all folds
 " press zM , in normal mode to CLOSE all folds
 
-" Already been loaded? ~~
-if exists('Tb_loaded') || &diff == 1 || has('gui_running')
+" Already been loaded? ~~ and don't execute when using vimdiff
+if exists('Tb_loaded') || &diff == 1
     finish
 else
       let Tb_loaded= 1
@@ -80,14 +80,14 @@ if ! hasmapto('1') || !hasmapto('<M-1>')
             inoremap <unique> <script> <M-0> <esc>:call <SID>Bf_SwitchTo( 10)<CR>:<BS>a
       else
             "NORMAL mode bindings for vim( dos32 )
-            noremap <unique> <script> ± :call <SID>Bf_SwitchTo( 1)<CR>:<BS>
-            noremap <unique> <script> ² :call <SID>Bf_SwitchTo( 2)<CR>:<BS>
-            noremap <unique> <script> ³ :call <SID>Bf_SwitchTo( 3)<CR>:<BS>
-            noremap <unique> <script> ´ :call <SID>Bf_SwitchTo( 4)<CR>:<BS>
-            noremap <unique> <script> µ :call <SID>Bf_SwitchTo( 5)<CR>:<BS>
-            noremap <unique> <script> ¶ :call <SID>Bf_SwitchTo( 6)<CR>:<BS>
-            noremap <unique> <script> · :call <SID>Bf_SwitchTo( 7)<CR>:<BS>
-            noremap <unique> <script> ¸ :call <SID>Bf_SwitchTo( 8)<CR>:<BS>
+            " noremap <unique> <script> ? :call <SID>Bf_SwitchTo( 1)<CR>:<BS>
+            " noremap <unique> <script> ? :call <SID>Bf_SwitchTo( 2)<CR>:<BS>
+            " noremap <unique> <script> ? :call <SID>Bf_SwitchTo( 3)<CR>:<BS>
+            " noremap <unique> <script> ? :call <SID>Bf_SwitchTo( 4)<CR>:<BS>
+            " noremap <unique> <script> ? :call <SID>Bf_SwitchTo( 5)<CR>:<BS>
+            " noremap <unique> <script> ? :call <SID>Bf_SwitchTo( 6)<CR>:<BS>
+            " noremap <unique> <script> ? :call <SID>Bf_SwitchTo( 7)<CR>:<BS>
+            " noremap <unique> <script> ? :call <SID>Bf_SwitchTo( 8)<CR>:<BS>
       "else
             "NORMAL mode bindings for vim( terminal)
             noremap <unique> <script> 1 :call <SID>Bf_SwitchTo( 1)<CR>:<BS>
@@ -112,6 +112,7 @@ if ! hasmapto('1') || !hasmapto('<M-1>')
             inoremap <unique> <script> 9 <esc>:call <SID>Bf_SwitchTo( 9)<CR>:<BS>a
             inoremap <unique> <script> 0 <esc>:call <SID>Bf_SwitchTo( 10)<CR>:<BS>a
       endif
+    " nnoremap bd :call <SID>Bf_DelWithD()<CR>:<BS>
 endif " %%
 
 
@@ -143,7 +144,7 @@ endif
 if !exists(':Tbbn')
       command! Tbbn call <SID>Bf_Cycle(1)
 endif
-if !exists(':Tbbp')
+if !exists(':Tbp')
       command! Tbbp call <SID>Bf_Cycle(0)
 endif 
 if !exists(':Tbbd')
@@ -325,6 +326,7 @@ augroup TabBar
 autocmd TabBar BufDelete   * call <SID>DEBUG('-=> BufDelete AutoCmd', 10) |call <SID>Tb_AutoUpdt(expand('<abuf>'))
 autocmd TabBar BufEnter    * call <SID>DEBUG('-=> BufEnter  AutoCmd', 10) |call <SID>Tb_AutoUpdt(-1)
 autocmd TabBar VimEnter    * call <SID>DEBUG('-=> VimEnter  AutoCmd', 10) |let g:Tb_AutoUpdt = 1 |call <SID>Tb_AutoUpdt(-1)
+augroup END
 " %%
 
 
@@ -372,9 +374,6 @@ function! <SID>Tb_Start(sticky, delBufNum)
     setlocal foldcolumn=0
     setlocal nonumber
 
-    " Keeps the TabBar window size when resizing the whole application
-    set winfixheight
-
     if has("syntax")
         syn clear
         syn match Tb_Normal             '\[[^\]]*\]'
@@ -420,7 +419,9 @@ function! <SID>Tb_Start(sticky, delBufNum)
     call <SID>Bf_SafePrint(a:delBufNum)
 
     if (l:curBuf != -1)
-        call search('\['.l:curBuf.':'.expand('#'.l:curBuf.':t').'\]')
+       " call search('\['.l:curBuf.':'.expand('#'.l:curBuf.':t').'\]')
+       " escape some characters
+        call search(escape('\['.l:curBuf.':'.expand('#'.l:curBuf.':t').'\]', '\\/.*$^~[]'))
     else
         call <SID>DEBUG('Tb_Start: No current buffer to search for',9)
     endif
@@ -574,6 +575,8 @@ function! <SID>Tb_AutoUpdt(delBufNum)
                     wincmd p
                 endif
             else
+                " build tabbar list anyway
+                let l:ListChanged = <SID>Bf_BuildList(a:delBufNum, 0)
                 if g:Tb_DBG_LVL > 0
                     call <SID>DEBUG('Tb_AutoUpdt: Failed in eligible check', 9)
                 endif
@@ -655,6 +658,7 @@ function! <SID>Win_Goto_Main()
 "        endwhile
     endif
 endfunction " %%
+
 " Win_Find - Return the window number of a named buffer ~~
 " If none is found then returns -1.
 function! <SID>Win_Find(bufName)
@@ -910,6 +914,7 @@ function! <SID>Bf_Choosed()
     endif
 endfunction " %%
 
+
 " Bf_DelWithD - From the -TabBar- window, delete selected buffer from list ~~
 " After making sure that we are in our explorer, This will delete the buffer
 " under the cursor. If the buffer under the cursor is being displayed in a
@@ -1067,6 +1072,7 @@ function! <SID>Bf_DelWithD()
 
     call <SID>Win_Goto_Main()
 endfunction " %%
+
 
 " Bf_SafePrint - Wrapper for getting -TabBar- window shown ~~
 "
@@ -1684,6 +1690,18 @@ endfunc " %%
 "   failing.
 "````````````````````````````````````````````````````````````````
 " %%
+
+" handle tabbar open window problem
+command! -bang -nargs=? -complete=file E call <SID>Wrapper_Edit(<f-args>)
+function <SID>Wrapper_Edit(filename)
+    " echo a:filename
+    if getbufvar(a:filename, "&buftype") != "nofile"
+        " open file below or above tabbar
+        call <SID>Win_Goto_Main()
+        exe "e ". a:filename
+    endif
+endfunction
+
 
 " BUGFIX:
 " 0.7. Removed mapping to <tt>, to avoid delayed response to <<
