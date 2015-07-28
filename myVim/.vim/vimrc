@@ -288,6 +288,11 @@ nmap <D-[> <<
 vmap <D-[> <gv
 vmap <D-]> >gv
 
+" my add
+nnoremap <CR> G
+vmap v <Plug>(expand_region_expand)
+vmap V <Plug>(expand_region_shrink)
+
 " eggcache vim
 nnoremap ; :
 :command W w

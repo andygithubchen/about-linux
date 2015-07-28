@@ -103,4 +103,12 @@ Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'fisadev/fisa-vim-colorscheme'
 Bundle 'colorscheme' 
 
+"-------------
+" my add
+"------------
+Bundle 'chriskempson/vim-expand-region'
+
+
+
+
 filetype plugin indent on     " required!

@@ -12,11 +12,13 @@
 
 "   Version:      0.7
 "   Maintainer:   Marius Groleo < groleo@gmail.com >
+"               NsLib <mdl13412@gmail.com>
 "   Description:  TabBar buffer explorer Vim Plugin
 "   Name Of File: tabbar.vim
 
 "   DOCUMENTATION: is at line :1445
-
+"   Modify:  自己绑定快捷键\0-9进行切换
+"            将Tbbd命令改为TbBufferClose
 " press zR , in normal mode to OPEN  all folds
 " press zM , in normal mode to CLOSE all folds
 
@@ -90,27 +92,28 @@ if ! hasmapto('1') || !hasmapto('<M-1>')
             " noremap <unique> <script> ? :call <SID>Bf_SwitchTo( 8)<CR>:<BS>
       "else
             "NORMAL mode bindings for vim( terminal)
-            noremap <unique> <script> 1 :call <SID>Bf_SwitchTo( 1)<CR>:<BS>
-            noremap <unique> <script> 2 :call <SID>Bf_SwitchTo( 2)<CR>:<BS>
-            noremap <unique> <script> 3 :call <SID>Bf_SwitchTo( 3)<CR>:<BS>
-            noremap <unique> <script> 4 :call <SID>Bf_SwitchTo( 4)<CR>:<BS>
-            noremap <unique> <script> 5 :call <SID>Bf_SwitchTo( 5)<CR>:<BS>
-            noremap <unique> <script> 6 :call <SID>Bf_SwitchTo( 6)<CR>:<BS>
-            noremap <unique> <script> 7 :call <SID>Bf_SwitchTo( 7)<CR>:<BS>
-            noremap <unique> <script> 8 :call <SID>Bf_SwitchTo( 8)<CR>:<BS>
-            noremap <unique> <script> 9 :call <SID>Bf_SwitchTo( 9)<CR>:<BS>
-            noremap <unique> <script> 0 :call <SID>Bf_SwitchTo( 10)<CR>:<BS>
+            noremap <unique> <script> \1 :call <SID>Bf_SwitchTo( 1)<CR>:<BS>
+            noremap <unique> <script> \2 :call <SID>Bf_SwitchTo( 2)<CR>:<BS>
+            noremap <unique> <script> \3 :call <SID>Bf_SwitchTo( 3)<CR>:<BS>
+            noremap <unique> <script> \4 :call <SID>Bf_SwitchTo( 4)<CR>:<BS>
+            noremap <unique> <script> \5 :call <SID>Bf_SwitchTo( 5)<CR>:<BS>
+            noremap <unique> <script> \6 :call <SID>Bf_SwitchTo( 6)<CR>:<BS>
+            noremap <unique> <script> \7 :call <SID>Bf_SwitchTo( 7)<CR>:<BS>
+            noremap <unique> <script> \8 :call <SID>Bf_SwitchTo( 8)<CR>:<BS>
+            noremap <unique> <script> \9 :call <SID>Bf_SwitchTo( 9)<CR>:<BS>
+            noremap <unique> <script> \0 :call <SID>Bf_SwitchTo( 10)<CR>:<BS>
             "INSERT mode bindings for vim( terminal)
-            inoremap <unique> <script> 1 <esc>:call <SID>Bf_SwitchTo( 1)<CR>:<BS>a
-            inoremap <unique> <script> 2 <esc>:call <SID>Bf_SwitchTo( 2)<CR>:<BS>a
-            inoremap <unique> <script> 3 <esc>:call <SID>Bf_SwitchTo( 3)<CR>:<BS>a
-            inoremap <unique> <script> 4 <esc>:call <SID>Bf_SwitchTo( 4)<CR>:<BS>a
-            inoremap <unique> <script> 5 <esc>:call <SID>Bf_SwitchTo( 5)<CR>:<BS>a
-            inoremap <unique> <script> 6 <esc>:call <SID>Bf_SwitchTo( 6)<CR>:<BS>a
-            inoremap <unique> <script> 7 <esc>:call <SID>Bf_SwitchTo( 7)<CR>:<BS>a
-            inoremap <unique> <script> 8 <esc>:call <SID>Bf_SwitchTo( 8)<CR>:<BS>a
-            inoremap <unique> <script> 9 <esc>:call <SID>Bf_SwitchTo( 9)<CR>:<BS>a
-            inoremap <unique> <script> 0 <esc>:call <SID>Bf_SwitchTo( 10)<CR>:<BS>a
+            " 插入模式下不使用切换功能
+            "inoremap <unique> <script> 1 <esc>:call <SID>Bf_SwitchTo( 1)<CR>:<BS>a
+            "inoremap <unique> <script> 2 <esc>:call <SID>Bf_SwitchTo( 2)<CR>:<BS>a
+            "inoremap <unique> <script> 3 <esc>:call <SID>Bf_SwitchTo( 3)<CR>:<BS>a
+            "inoremap <unique> <script> 4 <esc>:call <SID>Bf_SwitchTo( 4)<CR>:<BS>a
+            "inoremap <unique> <script> 5 <esc>:call <SID>Bf_SwitchTo( 5)<CR>:<BS>a
+            "inoremap <unique> <script> 6 <esc>:call <SID>Bf_SwitchTo( 6)<CR>:<BS>a
+            "inoremap <unique> <script> 7 <esc>:call <SID>Bf_SwitchTo( 7)<CR>:<BS>a
+            "inoremap <unique> <script> 8 <esc>:call <SID>Bf_SwitchTo( 8)<CR>:<BS>a
+            "inoremap <unique> <script> 9 <esc>:call <SID>Bf_SwitchTo( 9)<CR>:<BS>a
+            "inoremap <unique> <script> 0 <esc>:call <SID>Bf_SwitchTo( 10)<CR>:<BS>a
       endif
     " nnoremap bd :call <SID>Bf_DelWithD()<CR>:<BS>
 endif " %%
@@ -147,8 +150,8 @@ endif
 if !exists(':Tbp')
       command! Tbbp call <SID>Bf_Cycle(0)
 endif 
-if !exists(':Tbbd')
-      command! Tbbd call <SID>Bf_DelWithD()
+if !exists(':TbBufferClose')
+      command! TbBufferClose call <SID>Bf_DelWithD()
 endif
 " %%
 
@@ -778,9 +781,9 @@ function! <SID>Win_FindOrCreate(bufName, forceEdge, isExplorer)
       endif
     endif
 
-    "if g:Tb_DBG_LVL > 0
-    "  call <SID>DEBUG('Window ('.a:bufName.') created: '.winnr(),9)
-    "endif
+    if g:Tb_DBG_LVL > 0
+      call <SID>DEBUG('Window ('.a:bufName.') created: '.winnr(),9)
+    endif
 
   endif
 
