@@ -75,6 +75,7 @@ set cursorline
 " search
 set incsearch
 "set highlight 	" conflict with highlight current line
+hi Search term=standout ctermfg=0 ctermbg=3
 set ignorecase
 set smartcase
 set hlsearch
