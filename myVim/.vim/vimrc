@@ -79,6 +79,7 @@ hi Search term=standout ctermfg=0 ctermbg=3
 set ignorecase
 set smartcase
 set hlsearch
+set term=xterm
 
 " editor settings
 set history=1000
