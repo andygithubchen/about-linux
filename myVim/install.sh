@@ -9,9 +9,9 @@ echo ''
 echo '================ bigen config ================'
 echo ''
 
-sudo apt-get update
-sudo apt-get install vim-gtk
-sudo apt-get install ack-grep ctags
+#sudo apt-get update
+sudo brew install vim-gtk
+sudo brew install ack-grep ctags
 
 echo ''
 echo '========== delete old .vim files ============'

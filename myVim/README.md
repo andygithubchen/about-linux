@@ -7,4 +7,17 @@
   $ ./install.sh
 ```
 
+:BundleClean to clean up unused plugins
+:BundleInstall to install newly added plugins
+:BundleInstall! to upgrade all plugins
+
+
+F12 -> Toggle Mouse
+
+
+Ctrl + p -> Toggle ctrlp
+Alt + 1~9 -> Switch between multiple buffers
+Ctrl + h/j/k/l -> Moving between spilt windows
+:Ack or <leader> + a -> Toggle Ack searching
+
 源码来自 https://github.com/humiaozuzu/dot-vimrc
