@@ -20,4 +20,6 @@ Alt + 1~9 -> Switch between multiple buffers
 Ctrl + h/j/k/l -> Moving between spilt windows
 :Ack or <leader> + a -> Toggle Ack searching
 
+ve 选中一个单词，然后按S" ，就给这个单词加上了双引号
+
 源码来自 https://github.com/humiaozuzu/dot-vimrc
