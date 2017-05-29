@@ -79,7 +79,6 @@ hi Search term=standout ctermfg=0 ctermbg=3
 set ignorecase
 set smartcase
 set hlsearch
-set term=xterm
 
 " editor settings
 set history=1000
@@ -252,13 +251,18 @@ let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 " Keybindings for plugin toggle
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
-nmap <F5> :TagbarToggle<cr>
-nmap <F6> :NERDTreeToggle<cr>
 nmap <F3> :GundoToggle<cr>
 nmap <F4> :IndentGuidesToggle<cr>
+nmap <F5> :TagbarToggle<CR>
+nmap <F6> :NERDTreeToggle<cr>
 nmap  <D-/> :
 nnoremap <leader>a :Ack
 nnoremap <leader>v V`]
+" 替代 (Alt + 1~9 -> Switch between multiple buffers) , H、L
+" nmap <Home> :Tbbd<cr>
+nmap <Del> :TbBufferClose<cr>
+nmap H :Tbbp<cr>
+nmap L :Tbbn<cr>
 
 "------------------
 " Useful Functions
@@ -325,3 +329,17 @@ if has("gui_running")
     map <D-9> 9gt
     map <D-0> :tablast<CR>
 endif
+
+" 辅助Tabular插件的方法
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
+
