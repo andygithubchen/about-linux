@@ -70,7 +70,8 @@ color desert
 "au WinEnter * set cursorline cursorcolumn
 "set cursorline cursorcolumn
 "set cursorcolumn
-set cursorline 
+set cursorline
+set term=xterm
 
 " search
 set incsearch
