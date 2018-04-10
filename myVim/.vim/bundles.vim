@@ -1,3 +1,5 @@
+"http://5.vim-bootstrap.appspot.com/
+
 set nocompatible               " be iMproved
 filetype off                   " required!
 
@@ -107,6 +109,9 @@ Bundle 'colorscheme'
 " my add
 "------------
 Bundle 'chriskempson/vim-expand-region'
+
+Bundle 'JDeuce/jinja-syntax'
+Bundle 'Glench/Vim-Jinja2-Syntax'
 
 
 
