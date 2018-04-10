@@ -109,9 +109,7 @@ Bundle 'colorscheme'
 " my add
 "------------
 Bundle 'chriskempson/vim-expand-region'
-
 Bundle 'JDeuce/jinja-syntax'
-Bundle 'Glench/Vim-Jinja2-Syntax'
 
 
 
