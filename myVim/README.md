@@ -28,6 +28,7 @@
 5. viw 选中一个单词，然后按S" ，就给这个单词加上了双引号
 
 6. vim里符号对齐，语法为:'<,'>Tab /= (这是等号对齐)，[这是一个视频教程](http://vimcasts.org/episodes/aligning-text-with-tabular-vim/)
+   * 选中后按shift+:然后输入Tab /,(按逗号对齐)
 
 7. F3 查看修改记录
 8. F4 查看对齐情况
