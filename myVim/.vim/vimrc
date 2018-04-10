@@ -72,7 +72,6 @@ color desert
 "set cursorcolumn
 set cursorline 
 set term=xterm
-au FileType volt set ft=html
 
 " search
 set incsearch
@@ -117,7 +116,7 @@ autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=12
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120
 autocmd FileType coffee,javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120
-autocmd FileType html,htmldjango,xhtml,haml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=0
+autocmd FileType html,volt,htmldjango,xhtml,haml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=0
 autocmd FileType sass,scss,css setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
 
 " syntax support
@@ -346,7 +345,16 @@ function! s:align()
 endfunction
 
 " 支持volt模板语法高亮
-au BufRead,BufNewFile *.twig,*.swig set filetype=htmljinja
-au BufNewFile,BufRead *.jinja       set filetype=htmljinja
-au BufNewFile,BufRead *.jinja2      set filetype=htmljinja
-au BufNewFile,BufRead *.volt        set filetype=htmljinja
+fun! s:SelectHTML()
+let n = 1
+while n < 50 && n < line("$")
+  if getline(n) =~ '{%\s*\(extends\|block\|macro\|set\|if\|for\|include\|trans\)\>' " check for jinja
+    set ft=jinja
+    return
+  endif
+    let n = n + 1
+  endwhile
+endfun
+autocmd BufNewFile,BufRead *.html,*.htm  call s:SelectHTML()
+autocmd BufNewFile,BufRead *.j2,*.volt,*.jinja2,*.jinja set ft=jinja
+
