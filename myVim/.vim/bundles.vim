@@ -110,8 +110,7 @@ Bundle 'colorscheme'
 "------------
 Bundle 'chriskempson/vim-expand-region'
 Bundle 'JDeuce/jinja-syntax'
-
-
+Bundle 'posva/vim-vue'
 
 
 filetype plugin indent on     " required!
